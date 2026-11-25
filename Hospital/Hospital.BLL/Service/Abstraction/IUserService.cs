@@ -2,6 +2,6 @@
 {
     public interface IUserService
     {
-        public (bool, string) Create(CreateUserVM createUserVM);
+        public (bool, string?) Create(CreateUserVM createUserVM);
     }
 }
