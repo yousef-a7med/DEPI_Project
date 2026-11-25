@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="DataBase\" />
-    <Folder Include="Entities\" />
     <Folder Include="Migration\" />
     <Folder Include="Repo\Implementation\" />
     <Folder Include="Repo\Abstraction\" />
