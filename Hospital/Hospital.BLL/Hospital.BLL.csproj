@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hospital.DAL\Hospital.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="ModelVM\" />
+    <Folder Include="Mapper\" />
+    <Folder Include="Service\Implementation\" />
+    <Folder Include="Service\Abstraction\" />
+  </ItemGroup>
+
+</Project>
