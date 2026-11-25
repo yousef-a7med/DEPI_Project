@@ -19,11 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataBase\" />
-    <Folder Include="Migration\" />
-    <Folder Include="Repo\Implementation\" />
-    <Folder Include="Repo\Abstraction\" />
-  </ItemGroup>
-
 </Project>

@@ -12,10 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Helper\" />
-    <Folder Include="ModelVM\" />
     <Folder Include="Mapper\" />
-    <Folder Include="Service\Implementation\" />
-    <Folder Include="Service\Abstraction\" />
   </ItemGroup>
 
 </Project>
