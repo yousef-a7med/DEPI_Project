@@ -20,6 +20,7 @@ namespace Hospital.DAL.Entities
 
         //Navigation Property
         public List<Patient> Patients { get; set; }
+        public List<Doctor> Doctors { get; set; }
 
 
     }
