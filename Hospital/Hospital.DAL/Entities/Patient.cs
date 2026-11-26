@@ -6,7 +6,7 @@ namespace Hospital.DAL.Entities
 {
     public class Patient
     {
-        public  int ID { get; set; }
+        public  string ID { get; set; }
         public Gender Gender { get; set; }
         public  BloodType BloodType { get; set; }
         public  DateTime BirthDate { get; set; }
@@ -24,5 +24,7 @@ namespace Hospital.DAL.Entities
         [ForeignKey("User")]
         public  string UserID { get; set; }
         public  User User { get; set; }
+
+        public List<Prescription> Prescriptions { get; set; }
     }
 }

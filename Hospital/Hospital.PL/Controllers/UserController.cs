@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 namespace Hospital.PL.Controllers
 {
     public class UserController : Controller
