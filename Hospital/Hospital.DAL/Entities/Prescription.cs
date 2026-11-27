@@ -1,6 +1,6 @@
 ﻿namespace Hospital.DAL.Entities
 {
-    public class Prescription
+    public class Prescription : AdminConfig
     {
         public int PrescriptionId { get; set; }
         public DateTime IssuedDate { get; set; }

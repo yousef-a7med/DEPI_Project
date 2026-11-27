@@ -1,6 +1,6 @@
 ﻿namespace Hospital.DAL.Repo.Abstraction
 {
-    public interface IPatientRepo
+    public interface IPatientRepo 
     {
         (bool, string?) Create(Patient patient);
         (bool, string?) Edit(Patient newPatient, string oldPatientID);

@@ -1,7 +1,7 @@
 ﻿using Hospital.DAL.Enum;
 namespace Hospital.DAL.Entities
 {
-    public class Patient
+    public class Patient : AdminConfig
     {
         public  string ID { get; set; }
         public Gender Gender { get; set; }
