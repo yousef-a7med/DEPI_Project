@@ -1,6 +1,6 @@
 ﻿namespace Hospital.DAL.Entities
 {
-    public class Nurse
+    public class Nurse : AdminConfig
     {
         public string NurseId { get; set; }
         public string? Shift { get; set; }

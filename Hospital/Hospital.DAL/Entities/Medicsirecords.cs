@@ -1,6 +1,6 @@
 ﻿namespace Hospital.DAL.Entities
 {
-    public class MedicalRecord
+    public class MedicalRecord : AdminConfig
     {
         public int MedicalRecordId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;

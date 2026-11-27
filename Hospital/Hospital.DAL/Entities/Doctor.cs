@@ -1,4 +1,9 @@
-﻿namespace Hospital.DAL.Entities
+﻿
+using System.ComponentModel.DataAnnotations;
+
+namespace Hospital.DAL.Entities
+
+
 {
     public class Doctor : AdminConfig
     {

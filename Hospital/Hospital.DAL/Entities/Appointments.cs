@@ -1,6 +1,6 @@
 ﻿namespace Hospital.DAL.Entities
 {
-    public class Appointment
+    public class Appointment : AdminConfig
     {
         public int AppointmentId { get; set; }
         public DateTime AppointmentDate { get; set; }

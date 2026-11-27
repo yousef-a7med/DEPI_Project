@@ -1,6 +1,6 @@
 namespace Hospital.DAL.Entities
 {
-    public class Medication
+    public class Medication : AdminConfig
     {
         public int MedicationId { get; set; }
         public string Name { get; set; } = string.Empty;
