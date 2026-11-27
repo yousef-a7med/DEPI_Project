@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hospital.DAL.Entities
 {
-    public class DoctorSchedule
+    public class DoctorSchedule: AdminConfig
     {
         public int DoctorScheduleId { get; set; }
         public DaysOfWeek DayOfWeek { get; set; }
@@ -17,6 +17,6 @@ namespace Hospital.DAL.Entities
         //Navigation Property
         [ForeignKey("Doctor")]
         public string DoctorId { get; set; }
-        public Doctor? Doctor { get; set; }
+        public Doctor Doctor { get; set; }
     }
 }
