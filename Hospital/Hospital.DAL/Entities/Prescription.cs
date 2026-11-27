@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Hospital.DAL.Entities
+﻿namespace Hospital.DAL.Entities
 {
     public class Prescription
     {
@@ -21,6 +17,6 @@ namespace Hospital.DAL.Entities
         public string? PatientId { get; set; }
         public Patient? Patient { get; set; }
 
-        
+        public List<PrescriptionItem> PrescriptionItems { get; set; }
     }
 }

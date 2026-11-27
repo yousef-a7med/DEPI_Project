@@ -1,20 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hospital.DAL.Entities;
-
-public class MedicalRecord
+﻿namespace Hospital.DAL.Entities
 {
-    public int MedicalRecordId { get; set; }
-    public int PatientId { get; set; }
-    public int AppointmentId { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public string? TreatmentPlan { get; set; }
-    public string? Diagnosis { get; set; }
-    public string? Symptoms { get; set; }
+    public class MedicalRecord
+    {
+        public int MedicalRecordId { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string? TreatmentPlan { get; set; }
+        public string? Diagnosis { get; set; }
+        public string? Symptoms { get; set; }
 
-    public Patient Patient { get; set; } = null!;
-    public Appointment Appointment { get; set; } = null!;
-    public ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+
+        //Navigation Property
+        [ForeignKey("Appointment")]
+        public int? AppointmentId { get; set; }
+        public Appointment? Appointment { get; set; }
+
+
+        [ForeignKey("Nurse")]
+        public string? NurseId { get; set; }
+        public Nurse? Nurse { get; set; }
+
+        [ForeignKey("Doctor")]
+        public string? DoctorId { get; set; }
+        public Doctor? Doctor { get; set; }
+
+        public List<Prescription> Prescriptions { get; set; }
+    }
 }

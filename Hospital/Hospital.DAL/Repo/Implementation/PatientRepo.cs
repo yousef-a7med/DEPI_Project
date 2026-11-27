@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-namespace Hospital.DAL.Repo.Implementation
+﻿namespace Hospital.DAL.Repo.Implementation
 {
     internal class PatientRepo : IPatientRepo
     {
@@ -11,7 +10,7 @@ namespace Hospital.DAL.Repo.Implementation
             {
                 var result = Db.Patients.Add(patient);
                 Db.SaveChanges();
-                if (result.Entity.ID ==null)
+                if (string.IsNullOrEmpty(result.Entity.ID))
                     return (true, "Patient Not Added in DB");
                 return (false, null);
 
@@ -22,7 +21,7 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?) IPatientRepo.Delete(int PatientID)
+        (bool, string?) IPatientRepo.Delete(string PatientID)
         {
             try
             {
@@ -41,7 +40,7 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?) IPatientRepo.Edit(Patient newPatient, int oldPatientID)
+        (bool, string?) IPatientRepo.Edit(Patient newPatient, string oldPatientID)
         {
             try
             {
@@ -83,7 +82,7 @@ namespace Hospital.DAL.Repo.Implementation
             throw new NotImplementedException();
         }
 
-        (bool, string?, Patient?) IPatientRepo.GetByID(int PatientID)
+        (bool, string?, Patient?) IPatientRepo.GetByID(string PatientID)
         {
             try
             {
