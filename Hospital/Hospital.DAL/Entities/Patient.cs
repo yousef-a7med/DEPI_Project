@@ -12,8 +12,6 @@ namespace Hospital.DAL.Entities
         public  DateTime BirthDate { get; set; }
         public  string Allergies { get; set; }
 
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
-        public string? CreatorUser { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public string? ModifirrUser { get; set; }
         public bool IsDeleted { get; set; }
