@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Hospital.DAL.Entities
+﻿namespace Hospital.DAL.Entities
 {
     public class Doctor
     {
@@ -12,8 +9,13 @@ namespace Hospital.DAL.Entities
 
         //Navigation Property
         [ForeignKey("User")]
-        public string UserID { get; set; }
-        public User User { get; set; }
+        public string? UserID { get; set; }
+        public User? User { get; set; }
+
         public List<DoctorSchedule> DoctorSchedules { get; set; }
+
+        public List<Appointment> Appointments { get; set; }
+
+        public List<MedicalRecord> MedicalRecords { get; set; }
     }
 }

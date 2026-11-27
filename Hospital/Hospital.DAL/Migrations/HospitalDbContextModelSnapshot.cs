@@ -16,7 +16,7 @@ partial class HospitalDbContextModelSnapshot : ModelSnapshot
     // If you encounter a merge conflict in the line below, it means you need to
     // discard one of the migration branches and recreate its migrations on top of
     // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261125144516_Add_Email_Column";
+    public override string LastMigrationId => "20261127202651_Add_DataBase";
 
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -27,13 +27,202 @@ partial class HospitalDbContextModelSnapshot : ModelSnapshot
 
         SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-        modelBuilder.Entity("Hospital.DAL.Entities.Patient", b =>
+        modelBuilder.Entity("Hospital.DAL.Entities.Appointment", b =>
             {
-                var iD = b.Property<int>("ID")
+                var appointmentId = b.Property<int>("AppointmentId")
                     .ValueGeneratedOnAdd()
                     .HasColumnType("int");
 
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(iD);
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(appointmentId);
+
+                b.Property<DateTime>("AppointmentDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("DoctorId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<DateTime>("EndTime")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Notes")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("NurseId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<string>("PatientId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<DateTime>("StartTime")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Status")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("AppointmentId");
+
+                b.HasIndex("DoctorId");
+
+                b.HasIndex("NurseId");
+
+                b.HasIndex("PatientId");
+
+                b.ToTable("Appointments");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Doctor", b =>
+            {
+                b.Property<string>("DoctorId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<decimal>("ConsultationFee")
+                    .HasColumnType("decimal(18,2)");
+
+                b.Property<string>("LicenseNumber")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Specialization")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("UserID")
+                    .HasColumnType("nvarchar(450)");
+
+                b.HasKey("DoctorId");
+
+                b.HasIndex("UserID");
+
+                b.ToTable("Doctors");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.DoctorSchedule", b =>
+            {
+                var doctorScheduleId = b.Property<int>("DoctorScheduleId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(doctorScheduleId);
+
+                b.Property<int>("DayOfWeek")
+                    .HasColumnType("int");
+
+                b.Property<string>("DoctorId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<TimeOnly>("EndTime")
+                    .HasColumnType("time");
+
+                b.Property<bool>("IsAvailable")
+                    .HasColumnType("bit");
+
+                b.Property<TimeOnly>("StartTime")
+                    .HasColumnType("time");
+
+                b.HasKey("DoctorScheduleId");
+
+                b.HasIndex("DoctorId");
+
+                b.ToTable("DoctorSchedule");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.MedicalRecord", b =>
+            {
+                var medicalRecordId = b.Property<int>("MedicalRecordId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(medicalRecordId);
+
+                b.Property<int?>("AppointmentId")
+                    .HasColumnType("int");
+
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Diagnosis")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("DoctorId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<string>("NurseId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<string>("Symptoms")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("TreatmentPlan")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("MedicalRecordId");
+
+                b.HasIndex("AppointmentId")
+                    .IsUnique()
+                    .HasFilter("[AppointmentId] IS NOT NULL");
+
+                b.HasIndex("DoctorId");
+
+                b.HasIndex("NurseId");
+
+                b.ToTable("MedicalRecords");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Medication", b =>
+            {
+                var medicationId = b.Property<int>("MedicationId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(medicationId);
+
+                b.Property<DateTime?>("ExpiryDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<int>("StockQuantity")
+                    .HasColumnType("int");
+
+                b.Property<decimal>("UnitPrice")
+                    .HasColumnType("decimal(18,2)");
+
+                b.HasKey("MedicationId");
+
+                b.ToTable("Medications");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Nurse", b =>
+            {
+                b.Property<string>("NurseId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<string>("Department")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("LicenseNumber")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Shift")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("UserID")
+                    .HasColumnType("nvarchar(450)");
+
+                b.HasKey("NurseId");
+
+                b.HasIndex("UserID");
+
+                b.ToTable("Nurses");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Patient", b =>
+            {
+                b.Property<string>("ID")
+                    .HasColumnType("nvarchar(450)");
 
                 b.Property<string>("Allergies")
                     .IsRequired()
@@ -45,32 +234,10 @@ partial class HospitalDbContextModelSnapshot : ModelSnapshot
                 b.Property<int>("BloodType")
                     .HasColumnType("int");
 
-                b.Property<DateTime>("CreatedOn")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("CreatorUser")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime?>("DeletedOn")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("DeleterUser")
-                    .HasColumnType("nvarchar(max)");
-
                 b.Property<int>("Gender")
                     .HasColumnType("int");
 
-                b.Property<bool>("IsDeleted")
-                    .HasColumnType("bit");
-
-                b.Property<DateTime?>("ModifiedOn")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("ModifirrUser")
-                    .HasColumnType("nvarchar(max)");
-
                 b.Property<string>("UserID")
-                    .IsRequired()
                     .HasColumnType("nvarchar(450)");
 
                 b.HasKey("ID");
@@ -80,22 +247,75 @@ partial class HospitalDbContextModelSnapshot : ModelSnapshot
                 b.ToTable("Patients");
             });
 
+        modelBuilder.Entity("Hospital.DAL.Entities.Prescription", b =>
+            {
+                var prescriptionId = b.Property<int>("PrescriptionId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(prescriptionId);
+
+                b.Property<string>("Instructions")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime>("IssuedDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<int?>("MedicalRecordId")
+                    .HasColumnType("int");
+
+                b.Property<string>("PatientId")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<string>("Status")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("PrescriptionId");
+
+                b.HasIndex("MedicalRecordId");
+
+                b.HasIndex("PatientId");
+
+                b.ToTable("Prescriptions");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.PrescriptionItem", b =>
+            {
+                var prescriptionItemId = b.Property<int>("PrescriptionItemId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(prescriptionItemId);
+
+                b.Property<string>("Duration")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Frequency")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<int?>("MedicationId")
+                    .HasColumnType("int");
+
+                b.Property<int?>("PrescriptionId")
+                    .HasColumnType("int");
+
+                b.Property<int>("Quantity")
+                    .HasColumnType("int");
+
+                b.HasKey("PrescriptionItemId");
+
+                b.HasIndex("MedicationId");
+
+                b.HasIndex("PrescriptionId");
+
+                b.ToTable("PrescriptionItems");
+            });
+
         modelBuilder.Entity("Hospital.DAL.Entities.User", b =>
             {
                 b.Property<string>("ID")
                     .HasColumnType("nvarchar(450)");
-
-                b.Property<DateTime>("CreatedOn")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("CreatorUser")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime?>("DeletedOn")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("DeleterUser")
-                    .HasColumnType("nvarchar(max)");
 
                 b.Property<string>("Email")
                     .IsRequired()
@@ -107,15 +327,6 @@ partial class HospitalDbContextModelSnapshot : ModelSnapshot
 
                 b.Property<bool>("IsActive")
                     .HasColumnType("bit");
-
-                b.Property<bool>("IsDeleted")
-                    .HasColumnType("bit");
-
-                b.Property<DateTime?>("ModifiedOn")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("ModifirrUser")
-                    .HasColumnType("nvarchar(max)");
 
                 b.Property<string>("Password")
                     .IsRequired()
@@ -129,19 +340,163 @@ partial class HospitalDbContextModelSnapshot : ModelSnapshot
                 b.ToTable("Users");
             });
 
-        modelBuilder.Entity("Hospital.DAL.Entities.Patient", b =>
+        modelBuilder.Entity("Hospital.DAL.Entities.Appointment", b =>
+            {
+                b.HasOne("Hospital.DAL.Entities.Doctor", "Doctor")
+                    .WithMany("Appointments")
+                    .HasForeignKey("DoctorId");
+
+                b.HasOne("Hospital.DAL.Entities.Nurse", "Nurse")
+                    .WithMany("Appointments")
+                    .HasForeignKey("NurseId");
+
+                b.HasOne("Hospital.DAL.Entities.Patient", "Patient")
+                    .WithMany("Appointments")
+                    .HasForeignKey("PatientId");
+
+                b.Navigation("Doctor");
+
+                b.Navigation("Nurse");
+
+                b.Navigation("Patient");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Doctor", b =>
             {
                 b.HasOne("Hospital.DAL.Entities.User", "User")
-                    .WithMany("Patients")
-                    .HasForeignKey("UserID")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
+                    .WithMany("Doctors")
+                    .HasForeignKey("UserID");
 
                 b.Navigation("User");
             });
 
+        modelBuilder.Entity("Hospital.DAL.Entities.DoctorSchedule", b =>
+            {
+                b.HasOne("Hospital.DAL.Entities.Doctor", "Doctor")
+                    .WithMany("DoctorSchedules")
+                    .HasForeignKey("DoctorId");
+
+                b.Navigation("Doctor");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.MedicalRecord", b =>
+            {
+                b.HasOne("Hospital.DAL.Entities.Appointment", "Appointment")
+                    .WithOne("MedicalRecord")
+                    .HasForeignKey("Hospital.DAL.Entities.MedicalRecord", "AppointmentId");
+
+                b.HasOne("Hospital.DAL.Entities.Doctor", "Doctor")
+                    .WithMany("MedicalRecords")
+                    .HasForeignKey("DoctorId");
+
+                b.HasOne("Hospital.DAL.Entities.Nurse", "Nurse")
+                    .WithMany("MedicalRecords")
+                    .HasForeignKey("NurseId");
+
+                b.Navigation("Appointment");
+
+                b.Navigation("Doctor");
+
+                b.Navigation("Nurse");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Nurse", b =>
+            {
+                b.HasOne("Hospital.DAL.Entities.User", "User")
+                    .WithMany("Nurse")
+                    .HasForeignKey("UserID");
+
+                b.Navigation("User");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Patient", b =>
+            {
+                b.HasOne("Hospital.DAL.Entities.User", "User")
+                    .WithMany("Patients")
+                    .HasForeignKey("UserID");
+
+                b.Navigation("User");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Prescription", b =>
+            {
+                b.HasOne("Hospital.DAL.Entities.MedicalRecord", "MedicalRecord")
+                    .WithMany("Prescriptions")
+                    .HasForeignKey("MedicalRecordId");
+
+                b.HasOne("Hospital.DAL.Entities.Patient", "Patient")
+                    .WithMany("Prescriptions")
+                    .HasForeignKey("PatientId");
+
+                b.Navigation("MedicalRecord");
+
+                b.Navigation("Patient");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.PrescriptionItem", b =>
+            {
+                b.HasOne("Hospital.DAL.Entities.Medication", "Medication")
+                    .WithMany("PrescriptionItems")
+                    .HasForeignKey("MedicationId");
+
+                b.HasOne("Hospital.DAL.Entities.Prescription", "Prescription")
+                    .WithMany("PrescriptionItems")
+                    .HasForeignKey("PrescriptionId");
+
+                b.Navigation("Medication");
+
+                b.Navigation("Prescription");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Appointment", b =>
+            {
+                b.Navigation("MedicalRecord");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Doctor", b =>
+            {
+                b.Navigation("Appointments");
+
+                b.Navigation("DoctorSchedules");
+
+                b.Navigation("MedicalRecords");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.MedicalRecord", b =>
+            {
+                b.Navigation("Prescriptions");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Medication", b =>
+            {
+                b.Navigation("PrescriptionItems");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Nurse", b =>
+            {
+                b.Navigation("Appointments");
+
+                b.Navigation("MedicalRecords");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Patient", b =>
+            {
+                b.Navigation("Appointments");
+
+                b.Navigation("Prescriptions");
+            });
+
+        modelBuilder.Entity("Hospital.DAL.Entities.Prescription", b =>
+            {
+                b.Navigation("PrescriptionItems");
+            });
+
         modelBuilder.Entity("Hospital.DAL.Entities.User", b =>
             {
+                b.Navigation("Doctors");
+
+                b.Navigation("Nurse");
+
                 b.Navigation("Patients");
             });
 #pragma warning restore 612, 618

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-
-namespace Hospital.DAL.Entities
+﻿namespace Hospital.DAL.Entities
 {
     public class DoctorSchedule
     {
@@ -16,7 +11,8 @@ namespace Hospital.DAL.Entities
 
         //Navigation Property
         [ForeignKey("Doctor")]
-        public string DoctorId { get; set; }
+        public string? DoctorId { get; set; }
         public Doctor? Doctor { get; set; }
     }
 }
+

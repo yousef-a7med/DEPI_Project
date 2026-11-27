@@ -10,18 +10,11 @@ namespace Hospital.DAL.Entities
         public  bool IsActive { get; set; }
         public  string Email { get; set; }
 
-        public  DateTime CreatedOn { get; set; }= DateTime.Now;
-        public  string? CreatorUser { get; set; }
-        public  DateTime? ModifiedOn { get; set; }
-        public string? ModifirrUser { get; set; }
-        public  bool IsDeleted { get; set; }
-        public string? DeleterUser { get; set; }
-        public DateTime? DeletedOn { get; set; }
 
         //Navigation Property
         public List<Patient> Patients { get; set; }
         public List<Doctor> Doctors { get; set; }
-
+        public List<Nurse> Nurse { get; set; }
 
     }
 }

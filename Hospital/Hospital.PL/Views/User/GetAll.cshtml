@@ -1,0 +1,28 @@
+﻿@using Hospital.DAL.Entities
+@model List<User>
+
+
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">IsActive</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.ID</th>
+                <td>@item.FullName</td>
+                <td>@item.Role</td>
+                <td>@item.IsActive</td>
+            </tr>
+        }
+        
+        
+    </tbody>
+</table>

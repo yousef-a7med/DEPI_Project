@@ -1,4 +1,6 @@
 ﻿
+using Hospital.DAL.Entities;
+
 namespace Hospital.DAL.Repo.Abstraction
 {
     public interface IDoctorSchedule

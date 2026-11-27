@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-namespace Hospital.DAL.Repo.Abstraction
+﻿namespace Hospital.DAL.Repo.Abstraction
 {
     public interface IPatientRepo
     {
