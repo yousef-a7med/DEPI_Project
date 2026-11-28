@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hospital.DAL.Entities
+﻿namespace Hospital.DAL.Entities
 {
     public abstract class AdminConfig
     {
