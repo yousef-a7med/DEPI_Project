@@ -25,10 +25,10 @@ namespace Hospital.DAL.Repo.Implementation
         {
             try
             {
-                var schedule = Db.DoctorSchedule.FirstOrDefault(s => s.DoctorId == scheduleId);
-                if (schedule.DoctorId == null)
+                var doctorschedule = Db.DoctorSchedule.FirstOrDefault(s => s.DoctorId == scheduleId);
+                if (doctorschedule?.DoctorId == null)
                     return (true, "Doctor Schedule not found");
-                Db.DoctorSchedule.Remove(schedule);
+                Db.DoctorSchedule.Remove(doctorschedule);
                 Db.SaveChanges();
                 return (false, null);
             }
@@ -81,10 +81,10 @@ namespace Hospital.DAL.Repo.Implementation
         {
             try
             {
-                var doctorSchedule = Db.DoctorSchedule.FirstOrDefault(s => s.DoctorId == scheduleId);
-                if (doctorSchedule.DoctorId == null)
+                var doctorschedule = Db.DoctorSchedule.FirstOrDefault(s => s.DoctorId == scheduleId);
+                if (doctorschedule?.DoctorId == null)
                     return (true, "DoctorSchedule not found", null);
-                return (false, null, doctorSchedule);
+                return (false, null, doctorschedule);
             }
             catch (Exception ex)
             {

@@ -27,7 +27,7 @@ namespace Hospital.DAL.Repo.Implementation
             try
             {
                 var doctor = Db.Doctors.FirstOrDefault(d => d.DoctorId == doctorId);
-                if (doctor.DoctorId == null)
+                if (doctor?.DoctorId == null)
                     return (true, "Doctor not found");
                 Db.Doctors.Remove(doctor);
                 Db.SaveChanges();
@@ -81,7 +81,7 @@ namespace Hospital.DAL.Repo.Implementation
             try
             {
                 var doctor = Db.Doctors.FirstOrDefault(d => d.DoctorId == doctorId);
-                if (doctor.DoctorId == null)
+                if (doctor?.DoctorId == null)
                     return (true, "Doctor is not Found in DB", null);
 
                 return (false, null, doctor);
