@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Hospital.DAL.Entities
+
+
 {
     public class Doctor : AdminConfig
     {
