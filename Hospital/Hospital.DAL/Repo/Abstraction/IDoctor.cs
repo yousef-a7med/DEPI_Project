@@ -1,7 +1,4 @@
-﻿
-using Hospital.DAL.Entities;
-
-namespace Hospital.DAL.Repo.Abstraction
+﻿namespace Hospital.DAL.Repo.Abstraction
 {
     public interface IDoctor
     {

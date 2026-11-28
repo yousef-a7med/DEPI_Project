@@ -1,13 +1,12 @@
-﻿using Hospital.DAL.Entities; 
-namespace Hospital.DAL.Repo.Abstraction
+﻿namespace Hospital.DAL.Repo.Abstraction
 {
     public interface IMedicalRecordRepo
     {
-        (bool, string?) Create(Medicsirecords medicalRecord);
-        (bool, string?) Edit(Medicsirecords newMedicalRecord, string oldRecordID);
-        (bool, string?) Delete(string recordID);
-        (bool, string?, Medicsirecords?) GetByID(string recordID);
-        (bool, string?, List<Medicsirecords>?) GetAll();
-        (bool, string?, List<Medicsirecords>?) GetAll(Expression<Func<Medicsirecords, bool>> filter);
+        (bool, string?) Create(MedicalRecord medicalRecord);
+        (bool, string?) Edit(MedicalRecord newMedicalRecord, int oldRecordID);
+        (bool, string?) Delete(int recordID);
+        (bool, string?, MedicalRecord?) GetByID(int recordID);
+        (bool, string?, List<MedicalRecord>?) GetAll();
+        (bool, string?, List<MedicalRecord>?) GetAll(Expression<Func<MedicalRecord, bool>> filter);
     }
 }
