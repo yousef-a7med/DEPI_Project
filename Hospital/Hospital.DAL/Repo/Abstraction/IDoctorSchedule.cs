@@ -6,6 +6,6 @@
         (bool, string?) Edite(DoctorSchedule newdoctorschedule, int doctorscheduleId);
         (bool, string?) Delete(int doctorscheduleId);
         (bool, string?, DoctorSchedule?) GetById(int doctorscheduleId);
-        (bool, string?, List<DoctorSchedule>?) GetAll();
+        (bool, string?, List<DoctorSchedule>?) GetAll(Expression<Func<DoctorSchedule, bool>> filter);
     }
 }
