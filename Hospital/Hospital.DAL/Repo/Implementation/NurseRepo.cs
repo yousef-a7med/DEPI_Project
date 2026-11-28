@@ -1,7 +1,4 @@
-﻿using Hospital.DAL.Repo.Abstraction;
-using System.Linq.Expressions;
-
-namespace Hospital.DAL.Repo.Implementation
+﻿namespace Hospital.DAL.Repo.Implementation
 {
     public class NurseRepo : INurseRepo
     {
