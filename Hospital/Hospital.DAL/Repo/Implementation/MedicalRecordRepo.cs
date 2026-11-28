@@ -5,14 +5,14 @@ namespace Hospital.DAL.Repo.Implementation
     {
         private readonly HospitalDbContext Db = new HospitalDbContext();
 
-        (bool, string?) IMedicalRecordRepo.Create(Medicsirecords medicalRecord)
+        (bool, string?) IMedicalRecordRepo.Create(MedicalRecord medicalRecord)
         {
             try
             {
-                var result = Db.Medicsirecords.Add(medicalRecord);
+                var result = Db.MedicalRecords.Add(medicalRecord);
                 Db.SaveChanges();
 
-                if (result.Entity.ID == 0) 
+                if (result.Entity.MedicalRecordId == 0) 
                     return (true, "Medical Record Not Added in DB");
 
                 return (false, null);
@@ -27,12 +27,12 @@ namespace Hospital.DAL.Repo.Implementation
         {
             try
             {
-                var record = Db.Medicsirecords.FirstOrDefault(p => p.ID == recordID); 
+                var record = Db.MedicalRecords.FirstOrDefault(p => p.MedicalRecordId == recordID); 
 
                 if (record == null)
                     return (true, "Medical Record is not Found in DB");
 
-                Db.Medicsirecords.Remove(record);
+                Db.MedicalRecords.Remove(record);
                 Db.SaveChanges();
 
                 return (false, null);
@@ -43,11 +43,11 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?) IMedicalRecordRepo.Edit(Medicsirecords newRecord, int oldRecordID) 
+        (bool, string?) IMedicalRecordRepo.Edit(MedicalRecord newRecord, int oldRecordID) 
         {
             try
             {
-                var oldRecord = Db.Medicsirecords.Where(a => a.ID == oldRecordID).FirstOrDefault(); 
+                var oldRecord = Db.MedicalRecords.Where(a => a.MedicalRecordId == oldRecordID).FirstOrDefault(); 
 
                 if (oldRecord == null)
                     return (true, "There is no medical record in DB");
@@ -66,11 +66,11 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?, List<Medicsirecords>?) IMedicalRecordRepo.GetAll(Expression<Func<Medicsirecords, bool>> filter)
+        (bool, string?, List<MedicalRecord>?) IMedicalRecordRepo.GetAll(Expression<Func<MedicalRecord, bool>> filter)
         {
             try
             {
-                var result = Db.Medicsirecords.Where(filter).ToList();
+                var result = Db.MedicalRecords.Where(filter).ToList();
                 if (result.Count > 0)
                     return (false, null, result);
                 return (true, "There is no Data", null);
@@ -81,11 +81,11 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?, List<Medicsirecords>?) IMedicalRecordRepo.GetAll()
+        (bool, string?, List<MedicalRecord>?) IMedicalRecordRepo.GetAll()
         {
             try
             {
-                var result = Db.Medicsirecords.ToList();
+                var result = Db.MedicalRecords.ToList();
                 if (result.Count > 0)
                     return (false, null, result);
                 return (true, "There is no Data", null);
@@ -96,11 +96,11 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?, Medicsirecords?) IMedicalRecordRepo.GetByID(int recordID) 
+        (bool, string?, MedicalRecord?) IMedicalRecordRepo.GetByID(int recordID) 
         {
             try
             {
-                var record = Db.Medicsirecords.FirstOrDefault(u => u.ID == recordID); 
+                var record = Db.MedicalRecords.FirstOrDefault(u => u.MedicalRecordId == recordID); 
                 if (record == null)
                     return (true, "Medical Record is not Found in DB", null);
 

@@ -1,7 +1,4 @@
-﻿using Hospital.DAL.Repo.Abstraction;
-using System.Linq.Expressions;
-
-namespace Hospital.DAL.Repo.Implementation
+﻿namespace Hospital.DAL.Repo.Implementation
 {
     public class PrescriptionRepo : IPrescriptionRepo
     {
@@ -13,7 +10,7 @@ namespace Hospital.DAL.Repo.Implementation
             {
                 var result = Db.Prescriptions.Add(prescription);
                 Db.SaveChanges();
-                if (string.IsNullOrEmpty(result.Entity.PrescriptionId))
+                if (result.Entity.PrescriptionId == null)
                     return (true, "Prescription not added in DB :(");
 
                 return (false, null);
@@ -24,7 +21,7 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        public (bool, string?) Edit(Prescription newPrescription, string oldPrescriptionId)
+        public (bool, string?) Edit(Prescription newPrescription, int oldPrescriptionId)
         {
             try
             {
@@ -64,7 +61,7 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        public (bool, string?, Prescription?) GetById(string prescriptionId)
+        public (bool, string?, Prescription?) GetById(int prescriptionId)
         {
             try
             {
@@ -80,7 +77,7 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        public (bool, string?) Delete(string prescriptionId)
+        public (bool, string?) Delete(int prescriptionId)
         {
             try
             {

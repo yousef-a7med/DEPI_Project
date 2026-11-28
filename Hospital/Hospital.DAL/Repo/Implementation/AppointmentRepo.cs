@@ -13,7 +13,7 @@ namespace Hospital.DAL.Repo.Implementation
                 Db.SaveChanges();
 
                 
-                if (result.Entity.ID == 0) 
+                if (result.Entity.AppointmentId == 0) 
                     return (true, "Appointment Not Added in DB");
 
                 return (false, null);
@@ -28,7 +28,7 @@ namespace Hospital.DAL.Repo.Implementation
         {
             try
             {
-                var appointment = Db.Appointments.FirstOrDefault(p => p.ID == appointmentID); 
+                var appointment = Db.Appointments.FirstOrDefault(p => p.AppointmentId == appointmentID); 
 
                
                 if (appointment == null)
@@ -49,7 +49,7 @@ namespace Hospital.DAL.Repo.Implementation
         {
             try
             {
-                var oldAppointment = Db.Appointments.Where(a => a.ID == oldAppointmentID).FirstOrDefault(); 
+                var oldAppointment = Db.Appointments.Where(a => a.AppointmentId == oldAppointmentID).FirstOrDefault(); 
 
                
                 if (oldAppointment == null)
@@ -85,12 +85,13 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?, List<Appointment>?) IAppointmentRepo.GetAll()
+
+        (bool, string?, Appointment?) IAppointmentRepo.GetByFilter(Expression<Func<Appointment, bool>> filter)
         {
             try
             {
-                var result = Db.Appointments.ToList();
-                if (result.Count > 0)
+                var result = Db.Appointments.FirstOrDefault(filter);
+                if (result == null)
                     return (false, null, result);
                 return (true, "There is no Data", null);
             }
@@ -100,11 +101,12 @@ namespace Hospital.DAL.Repo.Implementation
             }
         }
 
-        (bool, string?, Appointment?) IAppointmentRepo.GetByID(int appointmentID) 
+        
+        (bool, string?, Appointment?) IAppointmentRepo.GetById(int appointmentId)
         {
             try
             {
-                var appointment = Db.Appointments.FirstOrDefault(u => u.ID == appointmentID); 
+                var appointment = Db.Appointments.FirstOrDefault(u => u.AppointmentId == appointmentId);
                 if (appointment == null)
                     return (true, "Appointment is not Found in DB", null);
 

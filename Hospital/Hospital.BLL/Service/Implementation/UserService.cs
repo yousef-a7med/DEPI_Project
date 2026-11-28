@@ -18,5 +18,20 @@ namespace Hospital.BLL.Service.Implementation
                 return (true, ex.Message);
             }
         }
+
+        (bool, string?) IUserService.Delete(CreateUserVM createUserVM)
+        {
+            throw new NotImplementedException();
+        }
+
+        (bool, string?) IUserService.Edit(CreateUserVM createUserVM)
+        {
+            throw new NotImplementedException();
+        }
+
+        (bool, string?) IUserService.GetAll(List<CreateUserVM> createUserVMs)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
